@@ -1,0 +1,21 @@
+.app {
+    height: 100%;
+    background: #ffffff;
+    position: relative;
+    padding-bottom: 50px;
+
+    .iconfont {
+      font-size: 20px;
+    }
+
+    .adm-tab-bar-item-active {
+      color: #21b97a;
+    }
+  }
+  
+  .bottom {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background: #ffffff;
+  }
