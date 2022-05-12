@@ -1,10 +1,8 @@
-import { useEffect } from 'react'
-
+import styls from './index.module.scss'
 function HouseList() {
-    useEffect(() => {
-    }, [])
+    console.log(styls)
     return (
-        <div>房屋列表
+        <div className={styls.test}>房屋列表
         </div>
     )
 }

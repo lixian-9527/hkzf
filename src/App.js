@@ -5,6 +5,7 @@ import News from './pages/News'
 import Index from './pages/Index'
 import HouseList from './pages/HouseList'
 import Profile from './pages/Profile'
+import Map from './pages/Map'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path='profile' element={<Profile/>}></Route>
         </Route>
         <Route path='/citylist' element={<CityList/>}></Route>
+        <Route path='/map' element={<Map/>}></Route>
       </Routes>
     </BrowserRouter>
   );

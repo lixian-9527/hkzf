@@ -3,6 +3,7 @@ import './index.scss'
 import { useEffect, useState } from 'react'
 import { getSwipersList, getGroupsList, getNewsList } from './../../apis/home'
 import { useNavigate } from 'react-router-dom'
+import { getCurrentCity } from '../../utils/index'
 
 // 导航栏图片引入
 import Nav1 from '../../assets/images/nav-1.png'
@@ -15,13 +16,19 @@ function Index() {
     const navigate = useNavigate();
 
     // 轮播图片数据
-    const [swipers, setSwipers] = useState([]);
+    const [swipers, setSwipers] = useState([{
+        id: 1,
+        imgSrc: "/img/swiper/1.png"
+    }]);
 
     // 推荐房屋小组数据
     const [groups, setGroups] = useState([]);
 
     // 最新消息数据
     const [news, setNews] = useState([]);
+
+    // 搜索栏最左侧热门城市
+    const [hotCity, setHotCity] = useState({});
 
     // 导航栏数据
     const navBarList = [
@@ -34,26 +41,39 @@ function Index() {
         {
             id: Math.random(),
             img: Nav2,
-            title: '合租'
+            title: '合租',
+            path: 'houseList'
         },
         {
             id: Math.random(),
             img: Nav3,
-            title: '地图找房'
+            title: '地图找房',
+            path: 'houseList'
         },
         {
             id: Math.random(),
             img: Nav4,
-            title: '去出租'
+            title: '去出租',
+            path: 'houseList'
         }
     ]
 
-    // 组件第一次被加载获取轮播图片数据
+    // 组件第一次被加载数据的获取
     useEffect(() => {
         getSwipers();
         getGroups();
         getNews();
+
+        // 获取当前位置
+        currentCity();
+        
     }, []) 
+
+    // 获取当前位置
+    async function currentCity() {
+        const currentCity = await getCurrentCity();
+        setHotCity(currentCity);
+    }
 
     // 调用接口获取轮播图片
     async function getSwipers() {
@@ -75,6 +95,7 @@ function Index() {
 
     // 渲染轮播图结构
     function renderSwipers() {
+        console.log('swipers', swipers)
         return swipers.map((item) => (
             <Swiper.Item key={item.id}>
                 <a
@@ -151,24 +172,25 @@ function Index() {
                 <div className='search'>
 
                     {/* 位置 */}
-                    <div className='location' onClick={() => navigate('citylist')}>
-                        <span>上海</span>
+                    <div className='location' onClick={() => navigate('/citylist')}>
+                        <span>{hotCity?.label}</span>
                         <i className='iconfont icon-arrow'></i>
                     </div>
 
                     {/* 搜索表单 */}
-                    <div className='form' onClick={() => navigate('search')}>
+                    <div className='form' onClick={() => navigate('/search')}>
                         <i className='iconfont icon-seach'></i>
                         <span>请输入小区地址</span>
                     </div>
                 </div>
 
                 {/* 右侧地图图标 */}
-                <i className='iconfont icon-map' onClick={() => navigate('map')}></i>
+                <i className='iconfont icon-map' onClick={() => navigate('/map')}></i>
             </div>
 
             {/* 轮播图 */}
             <Swiper autoplay loop>{renderSwipers()}</Swiper>
+            
 
             {/* 导航栏 */}
             <div className='nav-bar'>{rendNavBar()}</div>

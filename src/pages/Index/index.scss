@@ -1,6 +1,7 @@
 .main {
     width: 100%;
     position: relative;
+    padding-bottom: 50px;
 }
 
 .top-bar {
@@ -115,12 +116,14 @@
     width: inherit;
     display: flex;
     flex-wrap: wrap;
+    justify-content:space-between;
 
     .g-item {
-        width: 47.5%;
+        width: 48.5%;
         display: flex;
         background-color: #fff;
-        margin: 0 5px 10px 5px;
+        // margin: 0 5px 10px 5px;
+        margin-bottom: 10px;
         justify-content: space-between;
         padding: 15px 10px 20px 10px;
 
